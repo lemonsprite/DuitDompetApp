@@ -1,0 +1,122 @@
+@import 'main.css';
+
+/* Sidebar Konten */
+.sidebar {
+	position: absolute;
+	height: 100vh;
+	display: block;
+    width: var(--sidebar-width);
+    background: var(--abu-dark);
+	left: 0;
+	top: 0;
+	z-index: 5;
+	box-shadow: 0 0 5px #000;
+}
+.sidebar-head {
+	height: var(--navbar-height);
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+.sidebar-head a img {
+	display: block;
+	padding: .8rem;
+	height: var(--navbar-height);
+}
+.sidebar-body {	
+	height: calc(100vh - var(--navbar-height));
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	text-align: center;
+	color: #fff;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar-body li, .sidebar-body li a { display: block; }
+.sidebar-body li a {
+	height: 150px;
+	border-radius: 5px;
+	display: flex !important;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+	line-height: 1.8em;
+	align-items: center;
+	position: relative;
+}
+.sidebar-body li a:hover {
+	background: var(--abu-light);
+	cursor: default;
+}
+
+.sidebar-body li a.aktif {
+	border-right: 5px solid var(--oranye-dark);
+}
+.sidebar-body li a i { font-size: 1.5em; }
+.sidebar-body li a p { 
+	font-size: 100%;
+	font-family: Titillium-Xlight;
+	letter-spacing: .1em;
+	visibility: hidden;
+	width: 150px;
+	box-shadow: 0 0 5px #000;
+	background-color: var(--oranye-dark);
+	color: #fff;
+	font-weight: bold;
+	opacity: 0;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+	pointer-events: none;
+	top: calc(50% - 1.5rem);
+  	left: 130%;
+   
+	transition: .5s ease;
+	position: absolute;
+	z-index: 1;
+}
+.sidebar-body li a:hover p::after {
+	content: " ";
+	position: absolute;
+	right: 100%;
+	top: 35%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent var(--oranye-dark) transparent transparent;
+}
+.sidebar-body li a:hover p {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* App Nav Konten */
+.appnav {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: calc(var(--navbar-height) + .4em);
+	border-radius: 20% 20% 0 0;
+	background: var(--abu-light);
+	z-index: 20000;
+	align-items: center;
+	color: #fff;
+	justify-content: space-between;
+}
+.appnav li { flex: 1; display: flex; justify-content: space-around; position: relative; }
+
+.appnav li a {
+	color: inherit;
+	font-size: 1.4em;
+}
+.appnav li:nth-child(2) a {
+	background-color: var(--oranye-light);
+	padding: 1.3em;
+	box-shadow: 0 0 5px rgba(0,0,0,.3);
+	border-radius: 50%;
+	bottom: -1em;
+	position: absolute;
+}

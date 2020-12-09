@@ -1,0 +1,233 @@
+@import 'main.css';
+
+.konten { 
+    margin-left: var(--sidebar-width);
+}
+.navbar {
+    background: var(--abu-dark);
+    height: var(--navbar-height);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 0 4px #000;
+}
+.navbar h2 {
+    font-size: 1.3rem;
+    font-family: 'Titillium-Bold';
+    font-style: italic;
+    letter-spacing: .2em;
+}
+.navbar .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.user .circle {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+
+/* Main Konten Style */
+
+.stat h1 {
+    background: var(--abu-light);
+    color: #fff;
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 1.4em;
+    letter-spacing: .2em;
+}
+.banner { 
+	justify-content: space-around;
+	background: var(--abu-light);
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.kartu {
+	pointer-events: none;
+	background: var(--abu-dark);
+    color: #fff;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+	/* width: 18rem; */
+}
+.kartu i {
+	font-size: 2.3em;
+	height: 1.5em;
+	align-items: center;
+	display: flex;
+	padding-right: 15px;
+	margin-right: 15px;
+	border-right: 1px solid rgba(255,255,255,.5);
+}
+.kartu h3 { 
+	font-size: 18px; 
+	font-weight: bold;
+	color: var(--oranye-light);
+}
+.kartu h4 { font-size: 20px; }
+.splitter {
+	background: url(../img/bg.png) no-repeat;
+	background-size: cover;
+	background-position: bottom;
+	height: 75px;
+	display: flex;
+	align-items: center;
+	top: 0;
+	color: white;
+}
+
+
+.overview { padding: 0 40px; }
+
+.overview h1 {
+	color: var(--oranye-light);
+    margin-top: 1rem;
+    font-size: 1.6rem;
+	font-family: Titillium-Bold !important;
+	letter-spacing: .2em;
+}
+.overview .split {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.split .chart-line { flex: 2; }
+.split .chart-line h2, .split .chart-bar h2 {
+    margin-bottom: 20px;
+    display: block;
+    font-size: 1.2rem;
+}
+.split .chart-bar { 
+    margin-left: 20px;
+    text-align: center;
+    flex: 1; 
+}
+
+.konten-footer {
+    display: flex;
+    flex-direction: column;
+    opacity: .5;
+    font-size: .8rem;
+	position: relative;
+	padding: 1rem 2rem;
+    justify-content: center;
+	align-items: center;
+	line-height: 1.2em;
+}
+.konten-footer img {
+    display: block;
+	height: 2rem;
+	margin-bottom: 10px;
+}
+
+.kasual {
+    padding:  1.4rem;
+}
+.pageHead {
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+.inner-konten {
+    margin-top: 20px;
+    position: relative;
+}
+.btn-grup {
+    background: var(--abu-dark);
+    display: flex;
+    width: 22rem;
+    margin: auto;
+    padding: .3rem .5rem;
+    border-radius: 5px;
+}
+th {text-align: left;}
+td.btn-grup {
+    width: 100%;
+    background: transparent;
+    padding: 0 !important;
+}
+td .btn {
+    width: 20px;
+    color: var(--abu-dark);
+    border-radius: 0;
+}
+.btn {
+    padding: .5rem 1rem;
+    display: block;
+    flex: 1;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+.btn.aktif {
+    color: #fff;
+    background: var(--oranye-dark)
+}
+.tabel-data {
+    padding: 2rem 4rem;
+}
+
+
+.info-wrap {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - var(--navbar-height));
+}
+.info-head {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.info-wrap hr { 
+    margin-bottom: 2rem; 
+    opacity: .2; }
+
+.section p {
+    font-size: 1.1em;
+    line-height: 1.8em;
+    letter-spacing: 1px;
+    margin-bottom: 2em;
+}
+.section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;;
+}
+.section .box {
+    display: flex;
+    justify-content: space-around;
+}
+.section .box a {
+    color: var(--oranye-light);
+}
+.section .box a:hover {
+    transform: scale(1.2);
+    transition: .2s ease;
+}
+.section .kartu-sosial {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.3em;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background: var(--abu-dark);
+}
