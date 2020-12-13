@@ -2,8 +2,17 @@
 
 class Admin extends CI_Controller
 {
+    
+    public function __construct()
+    {
+        parent::__construct();
+    }
     public function viewTemplate($body, $data = null)
     {
+        // Deklarasi variabel yang selalu ada di template
+        $data['jenis_transaksi'] = $this->db->get('kode_transaksi')->result_array();
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidenav', $data);
         $this->load->view($body, $data);
@@ -38,4 +47,48 @@ class Admin extends CI_Controller
     }
 
     public function tentang() { $this->viewTemplate('admin/tentang', array('judul' => 'Tentang')); }
+
+
+
+
+    public function simpan()
+    {
+        $this->form_validation->set_rules(
+            'keterangan',
+            'Keterangan',
+            'required|min_length[6]', [
+                'required' => 'Form Keterangan harus diisi...',
+                'min_length' => 'Keterangan terlalu pendek...'
+        ]);
+        $this->form_validation->set_rules(
+            'nominal',
+            'Nominal',
+            'required', [
+                'required' => 'Form Nominal harus diisi...'
+        ]);
+        $this->form_validation->set_rules(
+            'jenis_transaksi',
+            'Jenis_Transaksi',
+            'required', [
+                'required' => 'Form Jenis Transaksi harus diisi...'
+        ]);
+        if($this->form_validation->run())
+        {
+            $data = array(
+                'keterangan'        => $this->input->post('keterangan'),
+                'tanggal_transaksi' => $this->input->post('tanggal'),
+                'nominal'           => $this->input->post('nominal'),
+                'ref'               => $this->input->post('jenis_transaksi')
+            );
+            $this->AppModel->addTransaksi($data);
+            $respon['status'] = 'success';
+            echo json_encode($respon);
+        } else {
+            $respon['status'] = 'error';
+            $respon['pesan'] = 'Periksa kembali form inputan anda';
+    
+            echo json_encode($respon);
+        }
+        
+    }
 }

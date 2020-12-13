@@ -70,6 +70,17 @@ function waktu()
 		document.write('Selamat Malam, ');
 }
 
+
+function setToday()
+{
+	var now = new Date();
+	var day = ("0" + now.getDate()).slice(-2);
+	var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+	$('[name="tanggal"]').val(today);
+}
+
+
 function init()
 {
 	$('.add-btn').click(function(){
@@ -90,22 +101,29 @@ function init()
 
 	$('.close-btn').click(function() {
 		console.log('Log : Tutup Modal');
+		$('#modal-form').trigger('reset');
+
+
 		$('.modal').removeClass('show');
 
 		setTimeout(() => {
 			$('.modal').css('opacity', 0);
 		}, 500);
+		
+		
 	})
 
 	window.onclick = function(e) {
 		if(e.target == document.querySelector('.modal'))
 		{
+			$('#modal-form').trigger('reset');
 			console.log('Log : Tutup Modal');
 			$('.modal').removeClass('show');
 	
 			setTimeout(() => {
 				$('.modal').css('opacity', 0);
 			}, 500);
+			
 		}
 	}
 
@@ -129,10 +147,6 @@ function init()
 
 
 	// Set Default Value Tanggal
-	var now = new Date();
-	var day = ("0" + now.getDate()).slice(-2);
-	var month = ("0" + (now.getMonth() + 1)).slice(-2);
-	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-	$('[name="tanggal"]').val(today);
+	setToday();
 
 }
