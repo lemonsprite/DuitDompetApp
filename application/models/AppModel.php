@@ -37,6 +37,16 @@ class AppModel extends CI_Model
         return $query['saldo'];
     }
 
+    /**
+     * Fungsi untuk mengambil Transaksi mingguan di database
+     *
+     * Mengambil data dari database berdasarkan mode yang diinput, dan akumulasi per minggu transaksi
+     *
+     * @param int $mode Jenis transaksi yang akan dipanggil datanya
+     * @param int $minggu Hitungan mundur per minggu
+     * 
+     * @return array $saldo
+     **/
     public function getTransaksiMinggu(int $mode, $minggu)
     {
         $today = $minggu - 1;
@@ -50,6 +60,16 @@ class AppModel extends CI_Model
         return $query['saldomasuk'];
     }
 
+    /**
+     * Fungsi buat ngambil data transaksi dari database
+     *
+     * Mengambil data dari database berdasarkan mode yang diinput per bulan
+     *
+     * @param int $bulan Bulan record yang akan dicallback
+     * @param int $tahun Tahun record yang akan dicallback
+     * @param int $mode Mode transaksi
+     * @return array
+     **/
     public function getTransaksiBulanan($bulan = null, $tahun = null, $mode)
     {
         $akhir_bln = cal_days_in_month(CAL_GREGORIAN,$bulan,$tahun);
