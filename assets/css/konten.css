@@ -25,6 +25,7 @@
 .navbar .user {
     display: flex;
     flex-direction: row;
+    height: 100%;
     align-items: center;
 }
 .user .circle {
@@ -37,7 +38,33 @@
     align-items: center;
     margin-left: 10px;
 }
+.circle:hover .dropdown-content {
+    display: block;
+}
+.block {
+    display: block !important;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
 
+.dropdown-content a:hover {background-color: #f1f1f1;}
 
 /* Main Konten Style */
 
@@ -57,7 +84,9 @@
     justify-content: space-around;
 }
 .kartu {
-	pointer-events: none;
+    pointer-events: none;
+    min-width: 280px;
+    line-height: 1.5em;
 	background: var(--abu-dark);
     color: #fff;
     display: flex;
@@ -179,9 +208,15 @@ td .btn {
     background: var(--oranye-dark)
 }
 .tabel-data {
-    padding: 2rem 4rem;
+    padding: 2rem 6rem;
 }
 
+.fluid-wrap {
+    padding: 5em 3rem 0 3rem!important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .info-wrap {
     padding: 2rem;

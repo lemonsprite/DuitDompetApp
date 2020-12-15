@@ -1,3 +1,4 @@
+
 <div class="sidebar">
     <div class="sidebar-head">
         <a href="<?= base_url('admin/index'); ?>">
@@ -7,7 +8,7 @@
     <ul class="sidebar-body">
         <li>
             <a class="<?php 
-            if(strtolower($this->uri->segment(2)) == 'index' && strtolower($this->uri->segment(1)) == 'admin') { echo 'aktif'; } ?>" class='' href="<?= base_url('admin/index'); ?>">
+            if(strtolower($this->uri->segment(2)) == 'index' || empty($this->uri->segment(2))) { echo 'aktif'; } ?>" class='' href="<?= base_url('admin/index'); ?>">
                 <i class="ti ti-home"></i>
                 <p>BERANDA</p>
             </a>
@@ -44,13 +45,42 @@
 <div class="konten">
     <div class="navbar">
         <h2>DUIT DOMPET</h2>
-        <div class="user">
-            USERNAME
-            <div class='circle'>
-                <i class='ti ti-user'></i>
+        <div class="user dropdown">
+            <?= strtoupper($user) ?>
+            <a class='circle' href='javascript:void(0)'>
+                <i class='ti ti-user' style=' color: #fff;'></i>
+            </a>
+            <script>
+                $(document).ready(() => {
+                    $('.circle').click(() => {
+                        $('.dropdown-content').toggleClass('block');
+                        
+
+
+                        $('.dropdown-content').mouseleave((e) => {
+                            if(e.target != $('.dropdown-content')) {
+                                $('.dropdown-content').removeClass('block');
+                            }
+                            console.log('dalem context');
+                            
+                        })
+                        
+                    });
+                    console.log('clicked');
+                });
+            </script>
+            <div class='dropdown-content' style='top: var(--navbar-height)'>
+                <a href='#'>Menu #1</a>
+                <a href='#'>Menu #2</a>
+                <a href='<?= base_url('admin/logout')?>'>Logout</a>
             </div>
         </div>
+        
     </div>
-    <div class='add-btn'>
-        <i class='ti ti-plus'></i>
+    <div class='float-btn'>
+        <a href='javascript:void' class='add-btn'>
+            <i class='ti ti-plus'></i>
+</a>
     </div>
+
+    

@@ -21,107 +21,72 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php $i = 1; foreach($transaksi as $trans) :?>
                         <tr>
-                            <td>1</td>
-                            <td>Pembayaran Hutang</td>
-                            <td>Rp. 12.000.000,-</td>
-                            <td>2011/05/20</td>
+                            <td><?= $i++ ?></td>
+                            <td><?= $trans['keterangan'] ?></td>
+                            <td>Rp. <?= number_format($trans['nominal'], 0,",",".") ?>,-</td>
+                            <td><?= $trans['tanggal_transaksi'] ?></td>
                             <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
+                                <a id='ubah' href='<?= base_url("admin/ubah/").$trans['id_transaksi']; ?>' class='btn'><i class='ti ti-pencil'></i></a>
+                                <a href='javascript:void(0)' data-id='<?= $trans['id_transaksi'] ?>' class='btn del'><i class='ti ti-trash'></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Pembayaran Listrik</td>
-                            <td>Rp. 150.000,-</td>
-                            <td>2011/05/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Pembayaran Telpon</td>
-                            <td>Rp. 75.000,-</td>
-                            <td>2011/06/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Pembayaran Wifi</td>
-                            <td>Rp. 75.000,-</td>
-                            <td>2011/06/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Pembayaran Pajak</td>
-                            <td>Rp. 75.000,-</td>
-                            <td>2011/06/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Pembayaran Hutang</td>
-                            <td>Rp. 12.000.000,-</td>
-                            <td>2011/05/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Pembayaran Listrik</td>
-                            <td>Rp. 150.000,-</td>
-                            <td>2011/05/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Pembayaran Telpon</td>
-                            <td>Rp. 75.000,-</td>
-                            <td>2011/06/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Pembayaran Wifi</td>
-                            <td>Rp. 75.000,-</td>
-                            <td>2011/06/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Pembayaran Pajak</td>
-                            <td>Rp. 75.000,-</td>
-                            <td>2011/06/20</td>
-                            <td class='btn-grup'>
-                                <a href="#" class='btn'><i class='ti ti-pencil'></i></a>
-                                <a href="#" class='btn'><i class='ti ti-trash'></i></a>
-                            </td>
-                        </tr>
+                        <?php endforeach; ?>
+                        <script>
+                            $(document).ready(function(){
+                                // $('#del').click(function(e) {
+                                //     e.preventDefault();
+                                // });
+                                
 
+                                $('.del').click(function(e){
+                                    // cegah aksi dari link
+                                    // console.log($(this).attr('data-id'));
+
+                                    // munculin modal
+                                    Swal.fire({
+                                        title: 'Anda yakin ingin menghapus ini?',
+                                        text: "Tindakan ini tidak dapat di pulihkan!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yakin, dong!',
+                                        cancelButtonText: 'Gak jadi deh!'
+                                    }).then((result) => {
+
+                                        // kalo dikonfirm eksekusi
+                                        if (result.isConfirmed) {
+                                            let dataid = $(this).attr('data-id');
+                                            
+                                            $.ajax({
+                                                url: '<?= base_url('admin/hapus/') ?>',
+                                                method: 'POST',
+                                                data: { id: dataid },
+                                                success: function(response) {
+                                                    // location.reload(true);
+                                                    Swal.fire({
+                                                        title: 'Dihapus!',
+                                                        text: 'Record telah dihapus dari Database!',
+                                                        icon: 'success',
+                                                        confirmButtonText: 'Oke, Makasih!'
+                                                    }).then((result) => {
+                                                        if(result.isConfirmed) {
+                                                            location.reload(true);     
+                                                        }
+                                                        
+                                                    });
+                                                }
+                                                
+                                            });
+                                            
+                                        }
+                                    });
+                                    
+                                });
+                            });
+                        </script>
                     </tbody>
                     <tfoot>
                         <tr>

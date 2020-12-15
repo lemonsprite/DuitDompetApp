@@ -1,6 +1,8 @@
 </div>
 </div>
-<div class='modal'>
+
+
+<div id='add' class='modal'>
     <div class='modal-container'>
         <div class='modal-head'>
             Tambah Data Transaksi
@@ -74,20 +76,24 @@ $('#modal-form').submit(function(e){
             if($.parseJSON(response).status == 'success')
             {
                 console.log('Log : Tutup Modal');
-                $('.modal').removeClass('show');
+                $('#add').removeClass('show');
         
                 setTimeout(() => {
-                    $('.modal').css('opacity', 0);
+                    $('#add').css('opacity', 0);
                 }, 500);
                 
                 // Reset Form terus setDefault Tanggal
                 $('#modal-form').trigger('reset');
-                setDef();
+                // setDef();
                 Swal.fire({
                     title: 'Data Anda Telah Disimpan',
                     icon: 'success',
                     text: 'Tenang! Data anda sudah disimpan dengan aman...',
                     confirmButtonText: 'OK, Terima Kasih!'
+                }).then((result) => {
+                    if(result.isConfirmed) {
+                        location.reload(true);
+                    }
                 });
             } else {
                 response = $.parseJSON(response);
@@ -108,33 +114,33 @@ $('#modal-form').submit(function(e){
 $('.close-btn').click(function() {
     console.log('Log : Tutup Modal');
     $('#modal-form').trigger('reset');
-    setDef();
+    // setDef();
 
-    $('.modal').removeClass('show');
+    $('#add').removeClass('show');
 
     setTimeout(() => {
-        $('.modal').css('opacity', 0);
+        $('#add').css('opacity', 0);
     }, 500);
     
     
 })
 
-window.onclick = function(e) {
-    if(e.target == document.querySelector('.modal'))
-    {
-        $('#modal-form').trigger('reset');
-        setDef();
+// window.onclick = function(e) {
+//     if(e.target == document.querySelector('#add'))
+//     {
+//         $('#modal-form').trigger('reset');
+//         setDef();
 
 
-        console.log('Log : Tutup Modal');
-        $('.modal').removeClass('show');
+//         console.log('Log : Tutup Modal');
+//         $('#add').removeClass('show');
 
-        setTimeout(() => {
-            $('.modal').css('opacity', 0);
-        }, 500);
+//         setTimeout(() => {
+//             $('#add').css('opacity', 0);
+//         }, 500);
         
-    }
-}
+//     }
+// }
 </script>
 </body>
 

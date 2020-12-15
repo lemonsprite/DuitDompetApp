@@ -1,9 +1,6 @@
 <div class="main-konten">
 
     <!-- /Konten -->
-    <div class='add-btn'>
-        <i class='ti ti-plus'></i>
-    </div>
     <div class='info-wrap'>
         <div>
             <h1 class='info-head'>TENTANG APLIKASI</h1>

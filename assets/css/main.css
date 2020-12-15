@@ -6,6 +6,8 @@
 	--oranye-dark: #EF8F1C;
 	--hijau-dark: #00F3AF;
 	--hijau-light: #7CDFC2;
+	--biru-dark: #2c7efa;
+	--biru-light: #afd6ff;
 	--sidebar-width: 70px;
 	--navbar-height: 70px;
 }
@@ -104,5 +106,12 @@ body {overflow: hidden;}
 	border: none;
 	border-radius: 0;
 	width: 100%;
+	font-size: .9em;
 	outline: none;
+	margin-right: 20px;
+}
+.btn:last-child { margin: 0;}
+
+.btn i {
+	margin-right: 10px;
 }

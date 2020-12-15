@@ -8,28 +8,28 @@
                 <i class='ti ti-wallet'></i>
                 <div class="kartu-konten">
                     <h3>Saldo Dompet</h3>
-                    <h4>Rp. 999.999.999,-</h4>
+                    <h4 id='saldo'>Rp. <?= number_format($saldo, 0, ",", ".") ?>,-</h4>
                 </div>
             </div>
             <div class="kartu">
                 <i class='ti ti-credit-card'></i>
                 <div class="kartu-konten">
-                    <h3>Uang Hari Ini</h3>
-                    <h4>Rp. 999.999.999,-</h4>
+                    <h3>Pengeluaran Hari Ini</h3>
+                    <h4 id='pengeluaran_harini'>Rp. <?= number_format($pengeluaran_harini, 0, ",", ".") ?>,-</h4>
                 </div>
             </div>
             <div class="kartu">
                 <i class='ti ti-stats-up'></i>
                 <div class="kartu-konten">
                     <h3>Pemasukan Bulan Ini</h3>
-                    <h4>Rp. 999.999.999,-</h4>
+                    <h4 id='pemasukan_bulani'>Rp. <?= number_format($pemasukan_bulani, 0, ",", ".") ?>,-</h4>
                 </div>
             </div>
             <div class="kartu">
                 <i class='ti ti-stats-down'></i>
                 <div class="kartu-konten">
                     <h3>Pengeluaran Bulan Ini</h3>
-                    <h4>Rp. 999.999.999,-</h4>
+                    <h4 id='pengeluaran_bulani'>Rp. <?= number_format($pengeluaran_bulani, 0, ",", ".") ?>,-</h4>
                 </div>
             </div>
         </div>
@@ -42,11 +42,12 @@
         </center>
         <div class="split">
             <div class='chart-line'>
-                <h2>Visualisasi Keuangan Mingguan</h2>
+                <h2>Fluktuasi Keuangan Mingguan</h2>
                 <div class="clBeranda"></div>
             </div>
             <div class='chart-bar'>
                 <h2>Perbandingan Pemasukan dan Pengeluaran</h2>
+                <?php if($pemasukan_bulani == 0 && $pengeluaran_bulani == 0) { echo '<h1>DATA MASIH KOSONG</h1>'; } ?>
                 <div class="cbBeranda"></div>
             </div>
         </div>
@@ -58,7 +59,10 @@
                     </div> -->
     <script type="text/javascript">
 		$(document).ready(function() {
-            // Chart Script
+            
+            
+            
+            // Chart Config untuk yang line chart
             var clBerandaOpt = {
                 chart: {
                     type: 'line',
@@ -68,39 +72,53 @@
                     height: 300,
                 },
                 series: [{
-                    name: 'Saldo',
+                    name: 'Fluktuasi Saldo',
                     data: [
-                        25000,
-                        200000,
-                        120000,
-                        50000,
-                        90000
+                        //interval data dari 5 minggu ke belakagng,
+                        <?= $this->AppModel->getTransaksiMinggu(1, 5) - $this->AppModel->getTransaksiMinggu(2, 5) ?>,
+                        <?= $this->AppModel->getTransaksiMinggu(1, 4) - $this->AppModel->getTransaksiMinggu(2, 4) ?>,
+                        <?= $this->AppModel->getTransaksiMinggu(1, 3) - $this->AppModel->getTransaksiMinggu(2, 3) ?>,
+                        <?= $this->AppModel->getTransaksiMinggu(1, 2) - $this->AppModel->getTransaksiMinggu(2, 2) ?>,
+                        <?= $this->AppModel->getTransaksiMinggu(1, 1) - $this->AppModel->getTransaksiMinggu(2, 1) ?>
                     ]
                 }],
                 yaxis: {
                     labels: {
                         formatter: function (value) {
-                            var x = value / 1000;
-                            if(x < 1000000)
-                                return x + ' RB';
-                            else if(x >= 1000000 && x < 1000000000)
+                            if(value > 999999 || value < 1000000)
+                            {
+                                var x = value / 1000000;
+
+                                // if(x < 0)
+                                //     x *= (-1);
+
+
+                                if(x > 0 && x < 1)
+                                    return x + ' RB';
+                                else if(x > 1000)
+                                    return x + ' M';
+                                
                                 return x + ' JT';
-                            else if(x >= 1000000000)
-                                return x + ' M';
+                            }
                         }
                     }
                 },
                 xaxis: {
                     categories: [
-                        getLastWeek(5),
                         getLastWeek(4),
                         getLastWeek(3),
                         getLastWeek(2),
-                        getLastWeek(1)
+                        getLastWeek(1),
+                        getLastWeek(0)
                     ]
                 },
                 tooltip: {
-                    enabled: true
+                    enabled: true,
+                    // custom: function({series, seriesIndex, dataPointIndex, w}) {
+                    //     return '<div class="arrow_box">' +
+                    //     '<span>' + series[seriesIndex][dataPointIndex] + '</span>' +
+                    //     '</div>'
+                    // }
                 },
                 stroke: {
                     curve: 'smooth',
@@ -112,8 +130,14 @@
             var clBeranda = new ApexCharts(document.querySelector(".clBeranda"), clBerandaOpt);
             clBeranda.render();
 
+
+
+            // Chart Config untuk yang donat
+
+            let pemasukan = <?php echo $pemasukan_bulani ?>;
+            let pengeluaran = <?php echo $pengeluaran_bulani ?>;
             var cbBerandaOpt = {
-                series: [2000000,5000000],
+                series: [pemasukan, pengeluaran],
                 labels: ["Pemasukan", "Pengeluaran"],
                 chart: {
                     type: 'donut',

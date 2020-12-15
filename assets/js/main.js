@@ -6,7 +6,7 @@ const today = new Date();
 // fungsi untuk get minggu kemarin
 function getLastWeek(num) {
 	var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (7 * num));
-	return lastWeek.getUTCDate().toString() + ", " + namaBulan[lastWeek.getMonth()];
+	return (lastWeek.getUTCDate() + 1).toString() + ", " + namaBulan[lastWeek.getMonth()];
 }
 
 // fungsi untuk get hari kemarin
@@ -85,47 +85,56 @@ function init()
 {
 	$('.add-btn').click(function(){
 		console.log('Log : Buka Modal');
-		$('.modal').addClass('show');
+		// setToday();
+
+		$('#add').addClass('show');
 		setTimeout(() => {
-			$('.modal').css('opacity',1);
+			$('#add').css('opacity',1);
 		}, 500);
 	});
 	
 	$('.add-btn-nav').click(function(){
 		console.log('Log : Buka Modal');
-		$('.modal').addClass('show');
+		
+
+		$('#add').addClass('show');
 		setTimeout(() => {
-			$('.modal').css('opacity',1);
+			$('#add').css('opacity',1);
 		}, 500);
+
+		// setToday();
 	});
 
 	$('.close-btn').click(function() {
 		console.log('Log : Tutup Modal');
 		$('#modal-form').trigger('reset');
+		
 
-
-		$('.modal').removeClass('show');
+		$('#add').removeClass('show');
 
 		setTimeout(() => {
-			$('.modal').css('opacity', 0);
+			$('#add').css('opacity', 0);
 		}, 500);
 		
-		
+		// setToday();
 	})
 
-	window.onclick = function(e) {
-		if(e.target == document.querySelector('.modal'))
-		{
-			$('#modal-form').trigger('reset');
-			console.log('Log : Tutup Modal');
-			$('.modal').removeClass('show');
+	// window.click = function(e) {
+		
+	// 	if(e.target == document.querySelector('.modal'))
+	// 	{
+	// 		$('#modal-form').trigger('reset');
+	// 		setToday();
+
+	// 		console.log('Log : Tutup Modal');
+	// 		$('.modal').removeClass('show');
 	
-			setTimeout(() => {
-				$('.modal').css('opacity', 0);
-			}, 500);
+	// 		setTimeout(() => {
+	// 			$('.modal').css('opacity', 0);
+	// 		}, 500);
 			
-		}
-	}
+	// 	}
+	// }
 
 
 	$('.eye').click(function(){
